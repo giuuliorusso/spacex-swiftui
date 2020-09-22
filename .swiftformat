@@ -1,0 +1,4 @@
+--swiftversion 5.3
+
+--indent 2
+--ifdef no-indent
