@@ -1,4 +1,5 @@
 --swiftversion 5.3
 
 --indent 2
+--indentcase true
 --ifdef no-indent
