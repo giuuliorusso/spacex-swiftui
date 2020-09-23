@@ -27,6 +27,10 @@
 		C2ADB2EC251AA51200B1C144 /* LaunchesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2ADB2EA251AA51200B1C144 /* LaunchesView.swift */; };
 		C2D2C3C0251A92D500E19B68 /* KingfisherSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = C2D2C3BF251A92D500E19B68 /* KingfisherSwiftUI */; };
 		C2D2C3C5251A92EF00E19B68 /* KingfisherSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = C2D2C3C4251A92EF00E19B68 /* KingfisherSwiftUI */; };
+		C2F23821251B492300F43577 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F23820251B492300F43577 /* SearchBar.swift */; };
+		C2F23822251B492300F43577 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F23820251B492300F43577 /* SearchBar.swift */; };
+		C2F23826251B4AB800F43577 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F23825251B4AB800F43577 /* SearchView.swift */; };
+		C2F23827251B4AB800F43577 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F23825251B4AB800F43577 /* SearchView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +48,8 @@
 		C2ADB2D7251A9E4E00B1C144 /* LaunchRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchRow.swift; sourceTree = "<group>"; };
 		C2ADB2DC251AA17100B1C144 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		C2ADB2EA251AA51200B1C144 /* LaunchesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchesView.swift; sourceTree = "<group>"; };
+		C2F23820251B492300F43577 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		C2F23825251B4AB800F43577 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				C2ADB2EA251AA51200B1C144 /* LaunchesView.swift */,
+				C2F23825251B4AB800F43577 /* SearchView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -78,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				C2ADB2D7251A9E4E00B1C144 /* LaunchRow.swift */,
+				C2F23820251B492300F43577 /* SearchBar.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -264,11 +272,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2F23826251B4AB800F43577 /* SearchView.swift in Sources */,
 				C2ADB2D3251A9CE200B1C144 /* Store.swift in Sources */,
 				C2ADB2D8251A9E4E00B1C144 /* LaunchRow.swift in Sources */,
 				C27947A3251981FC008F8FFD /* ContentView.swift in Sources */,
 				C2ADB2EB251AA51200B1C144 /* LaunchesView.swift in Sources */,
 				C2ADB2DD251AA17100B1C144 /* Utils.swift in Sources */,
+				C2F23821251B492300F43577 /* SearchBar.swift in Sources */,
 				C2161C3C25198E2900ECE862 /* API.swift in Sources */,
 				C2ADB2CE251A9B1000B1C144 /* Launch.swift in Sources */,
 				C27947A1251981FC008F8FFD /* SpaceXApp.swift in Sources */,
@@ -279,11 +289,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2F23827251B4AB800F43577 /* SearchView.swift in Sources */,
 				C2ADB2D4251A9CE200B1C144 /* Store.swift in Sources */,
 				C2ADB2D9251A9E4E00B1C144 /* LaunchRow.swift in Sources */,
 				C27947A4251981FC008F8FFD /* ContentView.swift in Sources */,
 				C2ADB2EC251AA51200B1C144 /* LaunchesView.swift in Sources */,
 				C2ADB2DE251AA17100B1C144 /* Utils.swift in Sources */,
+				C2F23822251B492300F43577 /* SearchBar.swift in Sources */,
 				C2161C3D25198E2900ECE862 /* API.swift in Sources */,
 				C2ADB2CF251A9B1000B1C144 /* Launch.swift in Sources */,
 				C27947A2251981FC008F8FFD /* SpaceXApp.swift in Sources */,

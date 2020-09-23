@@ -9,8 +9,20 @@ import SwiftUI
 
 struct ContentView: View {
   var body: some View {
-    NavigationView {
-      LaunchesView()
+    TabView {
+      NavigationView {
+        LaunchesView()
+      }.tabItem {
+        Image(systemName: "paperplane")
+        Text("Launches")
+      }
+
+      NavigationView {
+        SearchView()
+      }.tabItem {
+        Image(systemName: "magnifyingglass")
+        Text("Search")
+      }
     }
   }
 }
