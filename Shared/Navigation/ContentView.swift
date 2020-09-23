@@ -8,22 +8,20 @@
 import SwiftUI
 
 struct ContentView: View {
-  var body: some View {
-    TabView {
-      NavigationView {
-        LaunchesView()
-      }.tabItem {
-        Image(systemName: "paperplane")
-        Text("Launches")
-      }
+  #if os(iOS)
+  @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+  #endif
 
-      NavigationView {
-        SearchView()
-      }.tabItem {
-        Image(systemName: "magnifyingglass")
-        Text("Search")
-      }
+  var body: some View {
+    #if os(iOS)
+    if horizontalSizeClass == .compact {
+      AppTabNavigation()
+    } else {
+      AppSidebarNavigation()
     }
+    #else
+    AppSidebarNavigation()
+    #endif
   }
 }
 
