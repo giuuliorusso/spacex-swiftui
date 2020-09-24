@@ -12,12 +12,11 @@ struct LaunchRow: View {
   let launch: Launch
 
   var body: some View {
-    NavigationLink(destination: Text(launch.name)) {
+    NavigationLink(destination: LaunchDetailView(launch: launch)) {
       HStack {
         // Patch
-        if let url = launch.links.patch.small {
-          KFImage(url)
-            .cancelOnDisappear(true)
+        if let patch = launch.links.patch.small {
+          KFImage(patch)
             .resizable()
             .frame(width: 50, height: 50)
         } else {
