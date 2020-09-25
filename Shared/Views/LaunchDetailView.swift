@@ -11,6 +11,12 @@ import SwiftUI
 struct LaunchDetailView: View {
   let launch: Launch
 
+  #if os(iOS)
+  let listStyle = GroupedListStyle()
+  #else
+  let listStyle = DefaultListStyle()
+  #endif
+
   var body: some View {
     List {
       // Patch
@@ -59,7 +65,7 @@ struct LaunchDetailView: View {
         }
       }
     }
-    .listStyle(GroupedListStyle())
+    .listStyle(listStyle)
     .navigationTitle(launch.name)
   }
 }

@@ -25,10 +25,12 @@ struct AppSidebarNavigation: View {
           .tag(NavigationItem.launches)
       }
 
+      #if os(iOS)
       NavigationLink(destination: SearchView()) {
         Label("Search", systemImage: "magnifyingglass")
           .tag(NavigationItem.search)
       }
+      #endif
     }
     .listStyle(SidebarListStyle())
     .navigationTitle("SpaceX")

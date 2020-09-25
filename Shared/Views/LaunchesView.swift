@@ -10,6 +10,12 @@ import SwiftUI
 struct LaunchesView: View {
   @EnvironmentObject private var store: Store
 
+  #if os(iOS)
+  let listStyle = PlainListStyle()
+  #else
+  let listStyle = DefaultListStyle()
+  #endif
+
   var body: some View {
     if store.upcomingLaunches.isEmpty || store.pastLaunches.isEmpty {
       ProgressView()
@@ -38,7 +44,7 @@ struct LaunchesView: View {
           LaunchRow(launch: launch)
         }
       }
-    }.listStyle(PlainListStyle())
+    }.listStyle(listStyle)
   }
 
   struct Header: View {

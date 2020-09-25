@@ -11,6 +11,12 @@ import SwiftUI
 struct LaunchRow: View {
   let launch: Launch
 
+  #if os(iOS)
+  let padding: CGFloat = 0
+  #else
+  let padding: CGFloat = 8
+  #endif
+
   var body: some View {
     NavigationLink(destination: LaunchDetailView(launch: launch)) {
       HStack {
@@ -31,7 +37,7 @@ struct LaunchRow: View {
             .font(.subheadline)
             .foregroundColor(.secondary)
         }
-      }
+      }.padding(.vertical, padding)
     }
   }
 }
