@@ -9,25 +9,24 @@ import SwiftUI
 
 struct SearchView: View {
   @EnvironmentObject private var store: Store
-  @State private var query = ""
+  @ObservedObject private var searchBar = SearchBar()
 
   var body: some View {
-    VStack {
-      SearchBar(text: $query, placeholder: "Search")
-
-      if query.isEmpty {
+    Group {
+      if searchBar.text.isEmpty {
         Spacer()
       } else {
         list
       }
     }
     .navigationTitle("Search")
+    .add(searchBar)
     .onAppear { store.fetchUpcomingLaunches() }
     .onAppear { store.fetchPastLaunches() }
   }
 
   var list: some View {
-    let (upcoming, past) = store.searchAll(query: query)
+    let (upcoming, past) = store.searchAll(query: searchBar.text)
 
     return List {
       Section(header: Text("Upcoming launches")) {

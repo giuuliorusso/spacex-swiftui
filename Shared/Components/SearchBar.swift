@@ -7,44 +7,86 @@
 
 import SwiftUI
 
-// https://stackoverflow.com/questions/56490963
+// Thanks @Geri-Borbas <3
 
-struct SearchBar: View {
-  @Binding var text: String
-  let placeholder: String
+class SearchBar: NSObject, ObservableObject {
+  var placeholder = "Search"
 
-  @State private var showCancelButton = false
+  @Published var text = ""
+  let searchController = UISearchController(searchResultsController: nil)
 
-  var body: some View {
-    HStack {
-      HStack {
-        Image(systemName: "magnifyingglass")
+  override init() {
+    super.init()
+    searchController.obscuresBackgroundDuringPresentation = false
+    searchController.searchResultsUpdater = self
 
-        TextField(placeholder, text: $text)
-          .foregroundColor(.primary)
-          .onTapGesture { showCancelButton = true }
+    searchController.searchBar.placeholder = placeholder
+  }
+}
 
-        Button(action: { text = "" }) {
-          Image(systemName: "xmark.circle.fill")
-        }.opacity(text == "" ? 0 : 1)
-      }
-      .padding(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
-      .foregroundColor(.secondary)
-      .background(Color(.secondarySystemBackground))
-      .cornerRadius(10)
-
-      if showCancelButton {
-        Button("Cancel") {
-          UIApplication.shared.endEditing(true)
-          text = ""
-          showCancelButton = false
-        }
-      }
+extension SearchBar: UISearchResultsUpdating {
+  func updateSearchResults(for searchController: UISearchController) {
+    if let text = searchController.searchBar.text {
+      self.text = text
     }
-    .padding(.horizontal)
-    .padding(.top, showCancelButton ? 16 : 0)
-    .navigationBarHidden(showCancelButton)
-    .animation(.default)
+  }
+}
+
+// MARK: -
+
+final class ViewControllerResolver: UIViewControllerRepresentable {
+  let onResolve: (UIViewController) -> Void
+
+  init(onResolve: @escaping (UIViewController) -> Void) {
+    self.onResolve = onResolve
+  }
+
+  func makeUIViewController(context _: Context) -> ParentResolverViewController {
+    ParentResolverViewController(onResolve: onResolve)
+  }
+
+  func updateUIViewController(_: ParentResolverViewController, context _: Context) {}
+}
+
+class ParentResolverViewController: UIViewController {
+  let onResolve: (UIViewController) -> Void
+
+  init(onResolve: @escaping (UIViewController) -> Void) {
+    self.onResolve = onResolve
+    super.init(nibName: nil, bundle: nil)
+  }
+
+  @available(*, unavailable)
+  required init?(coder _: NSCoder) {
+    fatalError("Use init(onResolve:) to instantiate ParentResolverViewController.")
+  }
+
+  override func didMove(toParent parent: UIViewController?) {
+    super.didMove(toParent: parent)
+
+    if let parent = parent {
+      onResolve(parent)
+    }
+  }
+}
+
+// MARK: -
+
+struct SearchBarModifier: ViewModifier {
+  let searchBar: SearchBar
+
+  func body(content: Content) -> some View {
+    content.overlay(
+      ViewControllerResolver { viewController in
+        viewController.navigationItem.searchController = self.searchBar.searchController
+      }.frame(width: 0, height: 0)
+    )
+  }
+}
+
+extension View {
+  func add(_ searchBar: SearchBar) -> some View {
+    modifier(SearchBarModifier(searchBar: searchBar))
   }
 }
 
@@ -72,20 +114,5 @@ struct ResignKeyboardOnDragGesture: ViewModifier {
 extension View {
   func resignKeyboardOnDragGesture() -> some View {
     modifier(ResignKeyboardOnDragGesture())
-  }
-}
-
-// MARK: -
-
-struct SearchBar_Previews: PreviewProvider {
-  static var previews: some View {
-    Group {
-      SearchBar(text: .constant(""), placeholder: "Search")
-        .preferredColorScheme(.light)
-      SearchBar(text: .constant("CRS"), placeholder: "Search")
-        .preferredColorScheme(.light)
-      SearchBar(text: .constant(""), placeholder: "Search")
-        .preferredColorScheme(.dark)
-    }.previewLayout(.sizeThatFits)
   }
 }
